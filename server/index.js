@@ -1,4 +1,11 @@
-
+// const express = require("express");
+// const app = express();
+// const cors = require("cors");
+// const PORT = 4000;
+// app.use(cors());
+// app.listen(PORT, function() {
+//   console.log("Server is running on Port: " + PORT);
+// });
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -14,12 +21,13 @@ mongoose.connect(DB).then(()=>{
 	console.log("DB connected")
 }).catch((err)=>{console.log('Error in establishing database')})
 
+//middlewares
+// app.use(req, res, next)
 
 app.use(express.json())
 
 //linking the routes
-app.use(require('./router/accounts/auth'))
-
+app.use(require('./router/auth'))
 
 const middleware = (req, res, next) => {
     console.log('middleware is working...')
