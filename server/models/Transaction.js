@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
-const jwt = require("jsonwebtoken");
-const Joi = require("joi");
+
 const userSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -12,13 +11,16 @@ const userSchema = new mongoose.Schema({
         unique: true,
 
     },
-    password:{
-        type: String,
+    amount:{
+        type: Number,
         required:true,
-        minlength: 5,
-        maxlength: 1024,
+      
     },
+    timestamp: {
+        type: Date,
+        default: Date.now,
+      },
 })
 
-const User = mongoose.model('USER', userSchema)
-module.exports = User
+const Transaction = mongoose.model('TRANSACTION', userSchema)
+module.exports = Transaction
