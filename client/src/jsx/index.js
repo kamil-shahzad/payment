@@ -99,12 +99,12 @@ import Error403 from './pages/Error403'
 import Error404 from './pages/Error404'
 import Error500 from './pages/Error500'
 import Error503 from './pages/Error503'
+import Error504 from './pages/Error403'
 import Todo from './pages/Todo';
 
 //Scroll To Top
 import ScrollToTop from './layouts/ScrollToTop';
 import { GoFast } from './components/Payments/GoFast'
-
 
 const Markup = () => {
   // let path = window.location.pathname
