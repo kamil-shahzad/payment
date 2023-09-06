@@ -27,7 +27,7 @@ mongoose.connect(DB).then(()=>{
 app.use(express.json())
 
 //linking the routes
-app.use(require('./router/auth'))
+app.use(require('./router/accounts/auth'))
 
 const middleware = (req, res, next) => {
     console.log('middleware is working...')
