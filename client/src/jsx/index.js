@@ -106,6 +106,9 @@ import Todo from './pages/Todo';
 import ScrollToTop from './layouts/ScrollToTop';
 import { GoFast } from './components/Payments/GoFast'
 
+
+//payment
+
 const Markup = () => {
   // let path = window.location.pathname
   // path = path.split('/')
@@ -124,6 +127,7 @@ const Markup = () => {
     { url: "reviews", component: <Reviews/> },
 	// { url: 'task', component: <Task/> },
 
+  // {uri : "payment-new" , component : <Payment/>},
     /// Apps
     { url: 'app-profile', component: <AppProfile/> },
     // { url: 'post-details', component: <PostDetails/> },
@@ -182,6 +186,8 @@ const Markup = () => {
     // { url: 'ecom-product-detail', component: <ProductDetail/> },
     // { url: 'ecom-product-order', component: <ProductOrder/> },
     { url: 'payfast-checkout', component: <Checkout/> },
+
+    {url: 'payment-transaction' , component: <transactionCheckout/>},
     // { url: 'ecom-invoice', component: <Invoice/> },
     // { url: 'ecom-product-detail', component: <ProductDetail/> },
     // { url: 'ecom-customers', component: <EcomCustomers/> },
