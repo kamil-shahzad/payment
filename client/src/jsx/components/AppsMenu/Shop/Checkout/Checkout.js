@@ -4,11 +4,13 @@ import PageTitle from "../../../../layouts/PageTitle";
 import axios from "axios";
 const Checkout = () => {
    const [transactionAmount, setTransactionAmount] = useState('');
+   const [merchantName, setMerchantName] = useState('OVEX');
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
    const handleSubmit = async (e) => {
       e.preventDefault();
       const transactionData = {
+         merchantName : merchantName,
          name: name,
          email : email,
         amount: transactionAmount
@@ -58,7 +60,6 @@ axios.post(apiUrl, transactionData)
     }
   });
    }
-
    const handleSubmit3 = async (e) => {
       fetch('http://192.168.0.119:8080/transactions', {
          method: 'POST',
@@ -77,11 +78,7 @@ axios.post(apiUrl, transactionData)
          .then(response => response.json())
          .then(responseJson => {
            
-          // console.log(responseJson)
-          
- 
-      
-            
+          // console.log(responseJson) 
           if (responseJson.email) 
           { 
           } 
@@ -107,6 +104,17 @@ axios.post(apiUrl, transactionData)
                            <form className="needs-validation" noValidate="" onSubmit={handleSubmit}>
                               <div className="row">
                                  <div className="col-md-12 mb-12">
+                                 <label htmlFor="firstName">
+                                       Enter Merchant Name
+                                    </label>
+                                    <input
+                                       type="string"
+                                       className="form-control"
+                                       id="name"
+                                       placeholder=""
+                                       required
+                                       onChange={(e) => setMerchantName(e.target.value)}
+                                    />
                                     <label htmlFor="firstName">
                                        Enter Merchant ID
                                     </label>
@@ -133,7 +141,7 @@ axios.post(apiUrl, transactionData)
                                        Enter Token
                                     </label>
                                     <input
-                                       type="number"
+                                       type="string"
                                        className="form-control"
                                        id="amount"
                                        placeholder=""
