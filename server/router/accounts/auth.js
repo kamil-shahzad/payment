@@ -98,10 +98,10 @@ router.post('/transactions', async (req, res) => {
 
 router.post('/payments', async (req, res) => {
   try {
-    const { Basket_id, Merchant_id, name, token } = req.body;
+    const { Basket_id, Merchant_id, name, Acesstoken,Amount } = req.body;
 
-    if (!Basket_id, !Merchant_id, !name, !token) {
-      return res.status(422).json({ error: "please Enter Basket id , Merchant_id , Name & token" })
+    if (!Basket_id, !Merchant_id, !name, !Acesstoken ,!Amount) {
+      return res.status(422).json({ error: "please Enter Basket id , Merchant_id , Name , Token & Amount" })
     }
 
 
@@ -109,7 +109,8 @@ router.post('/payments', async (req, res) => {
       Basket_id: Basket_id,
       Merchant_id: Merchant_id,
       name: name,
-      token: token
+      Acesstoken: Acesstoken,
+      Amount : Amount
     })
 
     const savedPayment = await payment.save();
