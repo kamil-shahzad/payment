@@ -5,63 +5,12 @@ import axios from "axios";
 const Checkout = () => {
    const [transactionAmount, setTransactionAmount] = useState('');
    const [merchantName, setMerchantName] = useState('OVEX');
-   const [name, setName] = useState('');
-   const [email, setEmail] = useState('');
-   const handleSubmit = async (e) => {
-      e.preventDefault();
-      const transactionData = {
-         merchantName : merchantName,
-         name: name,
-         email : email,
-        amount: transactionAmount
-      };
-      try {
-        const response = await fetch('http://192.168.0.161:8080/api/transactions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(transactionData),
-        });
-    console.log(response);
-        if (response.ok) {
-          // Handle success, e.g., show a success message
-        } else {
-          // Handle error, e.g., show an error message
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    const handleSubmit2 = async (e) => {
-      e.preventDefault();
-      console.log("helo")
-      const transactionData = {
-         name: "name",
-         email : "email@ghj.com",
-        amount: 234
-      };
-      const apiUrl = 'http://192.168.0.161:8080/api/transactions'; // Replace with your actual API URL
-
-// Make the POST request using Axios
-axios.post(apiUrl, transactionData)
-  .then((response) => {
-    // Handle success, if applicable
-    console.log('Request succeeded:', response.data);
-  })
-  .catch((error) => {
-    // Handle error, including "Bad Request"
-    if (error.response) {
-      console.error('Error response from server:', error.response.status, error.response.statusText);
-      console.error('Error data:', error.response.data);
-    } else {
-      console.error('Network error:', error.message);
-    }
-  });
-   }
+   const [merchantId, setMerchantId] = useState('');
+   const [basketId, setBasketId] = useState('');
+   const [token, setToken] = useState('');
+  
    const handleSubmit3 = async (e) => {
-      fetch('http://192.168.0.119:8080/transactions', {
+      fetch('http://192.168.0.161:8080/payments', {
          method: 'POST',
          headers: {
              Accept: 'application/json',
@@ -69,17 +18,18 @@ axios.post(apiUrl, transactionData)
  
          },
          body: JSON.stringify({
-           name:name,
-           email:email,
-           amount:transactionAmount
+           Basket_id: basketId,
+           Merchant_id:merchantId,
+           name:merchantName,
+           token: token
 
          }),
      })
          .then(response => response.json())
          .then(responseJson => {
            
-          // console.log(responseJson) 
-          if (responseJson.email) 
+          console.log(responseJson) 
+          if (responseJson.merchantId) 
           { 
           } 
           else
@@ -101,7 +51,7 @@ axios.post(apiUrl, transactionData)
                      <div className="row">
                         <div className="col-md-12 order-md-1">
                            <h4 className="mb-3">Transaction Process</h4>
-                           <form className="needs-validation" noValidate="" onSubmit={handleSubmit}>
+                           <form action="https://ipg1.apps.net.pk/Ecommerce/api/Transaction/PostTransaction" method="POST" className="needs-validation" noValidate="" onSubmit={handleSubmit3}>
                               <div className="row">
                                  <div className="col-md-12 mb-12">
                                  <label htmlFor="firstName">
@@ -110,7 +60,7 @@ axios.post(apiUrl, transactionData)
                                     <input
                                        type="string"
                                        className="form-control"
-                                       id="name"
+                                       id="merchatName"
                                        placeholder=""
                                        required
                                        onChange={(e) => setMerchantName(e.target.value)}
@@ -121,10 +71,10 @@ axios.post(apiUrl, transactionData)
                                     <input
                                        type="number"
                                        className="form-control"
-                                       id="name"
+                                       id="merchantId"
                                        placeholder=""
                                        required
-                                       onChange={(e) => setName(e.target.value)}
+                                       onChange={(e) => setMerchantId(e.target.value)}
                                     />
                                      <label htmlFor="firstName">
                                        Enter Basket Id
@@ -132,13 +82,13 @@ axios.post(apiUrl, transactionData)
                                     <input
                                        type="number"
                                        className="form-control"
-                                       id="email"
+                                       id="basketId"
                                        placeholder=""
                                        required
-                                       onChange={(e) => setEmail(e.target.value)}
+                                       onChange={(e) => setBasketId(e.target.value)}
                                     />
                                      <label htmlFor="firstName">
-                                       Enter Token
+                                       Enter Amount
                                     </label>
                                     <input
                                        type="string"
@@ -146,7 +96,7 @@ axios.post(apiUrl, transactionData)
                                        id="amount"
                                        placeholder=""
                                        required
-                                       onChange={(e) => setTransactionAmount(e.target.value)}
+                                       onChange={(e) => setToken(e.target.value)}
                                     />
                                     <div className="invalid-feedback">
                                        Valid Transaction Required.

@@ -341,7 +341,7 @@ const UiCards = () => {
             </Card.Body>
             <Card.Footer>
               <Card.Text className=' d-inline'>See Info</Card.Text>
-              <Link to='/ui-card' className='card-link float-right'>
+              <Link to='/web-hook' className='card-link float-right'>
                 Go
               </Link>
             </Card.Footer>

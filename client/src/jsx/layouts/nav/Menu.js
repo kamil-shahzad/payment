@@ -98,6 +98,10 @@ export const MenuList = [
                 title:'Calendar',
                 to: 'app-calender'
             },
+            {
+                title:'Web Hook',
+                to: 'web-hook'
+            },
 
         ],
     },
