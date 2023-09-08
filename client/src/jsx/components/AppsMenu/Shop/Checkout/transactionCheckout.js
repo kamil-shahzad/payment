@@ -77,7 +77,7 @@ axios.post(apiUrl, transactionData)
          .then(response => response.json())
          .then(responseJson => {
            
-          // console.log(responseJson)
+          console.log(responseJson)
           
  
       
