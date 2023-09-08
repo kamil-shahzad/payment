@@ -6,7 +6,24 @@ const mongoose = require('mongoose')
 
 app.use(express.json())
 
+  app.get('/api/token', async (req, res) => {
+    try {
+      const response = await axios.get('https://ipg1.apps.net.pk/Ecommerce/api/Transaction/GetAccessToken', {
+        params: req.query
+      });
+      res.json(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
 
+  app.post('/submit', (req, res) => {
+    const uniqueToken = uuidv4(); // Generate a unique tokens
+    res.json({ BASKET_ID: uniqueToken }); // Send the token back to the client
+  });
+  
 dotenv.config({path:'./config.env'})
 const DB = process.env.DATABASE
 
