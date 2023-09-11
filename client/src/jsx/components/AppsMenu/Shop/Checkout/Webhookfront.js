@@ -16,18 +16,42 @@ export const WebHook = () => {
 
     return basketID;
   }
-
   const generatedID = generateBasketID();
-  console.log(generatedID); // Output will be something like "ABC-45" (random)
-
+  // console.log(generatedID); 
   const [TXNMAMT, setTxnAmt] = useState('');
   const [MERCH_ID, setMerchantId] = useState();
   const [SECUR_KEY, setSecureKey] = useState();
   const [submitted, setSubmitted] = useState('');
 
+  const getTokenAccess = async (e) => {
+    console.log("Data is going to be fetched")
+    fetch('http://192.168.0.161/payments', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        Basket_id: 8983,
+        Merchant_id: 238,
+        name: "Hamza",
+        Acesstoken: "alksasa",
+        Amount: 840
+      }),
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+
+        console.log(responseJson)
+      })
+      .catch(err => {
+        console.log("error",err)
+
+      });
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("ITS HERE")
     const url = `http://192.168.0.119:8080/api/access-token`
     const webhookResponse = await fetch(url, {
       method: 'POST',
@@ -49,12 +73,41 @@ export const WebHook = () => {
       console.error("Request to API failed with status:", webhookResponse.status);
     }
   };
-
-
-
-
-
   return (
+    <div className="">
+      <div className="card-body">
+        <div className="row">
+          <div className="col-md-4 order-md-1 border p-5 shadow card">
+            <h4 className="mb-3">Transaction Process</h4>
+            <form className="needs-validation" noValidate="">
+              <div className="row">
+                <div className="col-12 mb-4">
+                  <label htmlFor="firstName">
+                    Transaction Amount
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="name"
+                    placeholder=""
+                    required
+                    onChange={(e) => setTxnAmt(e.target.value)}
+                  />
+                </div>
+              </div>
+              <hr />
+              <button
+                onClick={getTokenAccess}
+                className="btn btn-primary btn-lg btn-block"
+                type="submit"
+              >
+                Continue Transaction
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     // <div>
     //   <form >
     //     <div>
@@ -107,44 +160,5 @@ export const WebHook = () => {
     //   )}
     //   <button>Fetch Access Token</button>
     // </div>
-
-
-    <div className="">
-      <div className="card-body">
-        <div className="row">
-          <div className="col-md-4 order-md-1 border p-5 shadow card">
-            <h4 className="mb-3">Transaction Process</h4>
-            <form className="needs-validation" noValidate="">
-              <div className="row">
-                <div className="col-12 mb-4">
-                  <label htmlFor="firstName">
-                    Transaction Amount
-                  </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="name"
-                    placeholder=""
-                    required
-                    onChange={(e) => setTxnAmt(e.target.value)}
-                  />
-                </div>
-              </div>
-              <hr />
-              <button
-                onClick={handleSubmit}
-                className="btn btn-primary btn-lg btn-block"
-                type="submit"
-              >
-                Continue Transaction
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
   )
 }
