@@ -102,7 +102,7 @@ export const WebHook = () => {
       )}
       {transactionForms && (
         <div>
-          <TransactionForm TXTAMT={TXNAMT} Basket_Id={BASKET_ID} Token = {accessTokenData}/>
+          <TransactionForm TXTAMT={TXNAMT} />
         </div>
       )}
 
